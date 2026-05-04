@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-	--color-accent: #ff007f;
+	--color-accent: #22c55e;
 	--font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -17,15 +17,15 @@
 @keyframes azul-blob {
 	0%,
 	100% {
-		transform: translate(0, 0) scale(1);
+		transform: translate3d(0, 0, 0) scale(1);
 		opacity: 0.45;
 	}
 	33% {
-		transform: translate(8%, -6%) scale(1.08);
+		transform: translate3d(8%, -6%, 0) scale(1.08);
 		opacity: 0.6;
 	}
 	66% {
-		transform: translate(-6%, 5%) scale(0.92);
+		transform: translate3d(-6%, 5%, 0) scale(0.92);
 		opacity: 0.5;
 	}
 }
@@ -33,11 +33,11 @@
 @keyframes azul-blob-2 {
 	0%,
 	100% {
-		transform: translate(0, 0) scale(1);
+		transform: translate3d(0, 0, 0) scale(1);
 		opacity: 0.35;
 	}
 	50% {
-		transform: translate(-10%, 8%) scale(1.12);
+		transform: translate3d(-10%, 8%, 0) scale(1.12);
 		opacity: 0.55;
 	}
 }
@@ -45,11 +45,11 @@
 @keyframes azul-fade-up {
 	from {
 		opacity: 0;
-		transform: translateY(14px);
+		transform: translate3d(0, 14px, 0);
 	}
 	to {
 		opacity: 1;
-		transform: translateY(0);
+		transform: translate3d(0, 0, 0);
 	}
 }
 
@@ -91,8 +91,8 @@
 	background: linear-gradient(
 		105deg,
 		#fff 0%,
-		#ff007f 45%,
-		#ff4d9a 55%,
+		#22c55e 45%,
+		#4ade80 55%,
 		#fff 100%
 	);
 	background-size: 200% auto;
@@ -100,15 +100,20 @@
 	background-clip: text;
 	color: transparent;
 	animation: azul-shimmer 8s linear infinite;
+	will-change: background-position;
 }
 
 @keyframes hero-marquee {
 	from {
-		transform: translateX(0);
+		transform: translate3d(0, 0, 0);
 	}
 	to {
-		transform: translateX(-50%);
+		transform: translate3d(-50%, 0, 0);
 	}
+}
+
+.hero-marquee-lane {
+	contain: paint;
 }
 
 .hero-marquee-track {
@@ -117,6 +122,14 @@
 	gap: 2rem;
 	animation: hero-marquee linear infinite;
 	will-change: transform;
+	backface-visibility: hidden;
+	transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-marquee-track {
+		animation-duration: 120s !important;
+	}
 }
 
 @media (min-width: 768px) {

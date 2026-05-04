@@ -1,9 +1,22 @@
 ---
 import HeroGameCarousel from './HeroGameCarousel.astro';
-import { liveStats, formatCompact } from '../data/site';
+import { formatCompact } from '../data/site';
+import { getCuratedRobloxGamesPayload } from '../lib/roblox-group-games';
 
-const playersLabel = formatCompact(liveStats.totalPlayers);
-const visitsLabel = formatCompact(liveStats.totalVisits);
+let totalPlayers = 0;
+let totalVisits = 0;
+try {
+	const { games } = await getCuratedRobloxGamesPayload();
+	for (const g of games) {
+		totalPlayers += g.playing;
+		totalVisits += g.visits;
+	}
+} catch {
+	/* build / offline: client script will try again */
+}
+
+const playersLabel = formatCompact(totalPlayers);
+const visitsLabel = formatCompact(totalVisits);
 ---
 
 <section
@@ -21,31 +34,38 @@ const visitsLabel = formatCompact(liveStats.totalVisits);
 			class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-4 py-12 text-center sm:px-6"
 		>
 			<h1
-				class="max-w-5xl text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl animate-azul-fade-up"
+				class="max-w-5xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl animate-azul-fade-up flex flex-wrap items-baseline justify-center gap-x-[0.15em] gap-y-1"
 			>
-				Unleashing the potential of <span class="text-[#ff007f]">Roblox</span> gaming
+				<span class="relative inline-flex items-center">
+					<span
+						class="absolute -left-1 top-[0.12em] bottom-[0.12em] w-1 rounded-full bg-[#22c55e] shadow-[0_0_16px_rgba(34,197,94,0.7)]"
+						aria-hidden="true"
+					></span>
+					<span
+						class="relative pl-3.5 sm:pl-4 font-extrabold tracking-tight bg-gradient-to-br from-[#4ade80] via-[#22c55e] to-[#16a34a] bg-clip-text text-transparent drop-shadow-[0_0_28px_rgba(34,197,94,0.45)] [text-shadow:0_1px_0_rgba(0,0,0,0.35)]"
+					>
+						Voron
+					</span>
+					<span
+						class="pointer-events-none absolute -bottom-1 left-3 right-0 h-px bg-gradient-to-r from-[#22c55e] via-[#22c55e]/60 to-transparent sm:left-4"
+						aria-hidden="true"
+					></span>
+				</span>
+				<span class="text-white tracking-tight">Creations</span>
 			</h1>
 			<p
-				class="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg leading-relaxed animate-azul-fade-up animate-azul-delay-1"
+				class="mx-auto mt-6 max-w-2xl text-base text-white/75 sm:text-lg leading-relaxed animate-azul-fade-up animate-azul-delay-1"
 			>
-				We create immersive, high-quality gaming experiences that captivate millions of players
-				and deliver measurable results for brands.
+				The official archive of my Roblox games and projects.
 			</p>
 			<div
 				class="mt-10 flex flex-wrap items-center justify-center gap-4 animate-azul-fade-up animate-azul-delay-2"
 			>
 				<a
 					href="/#games"
-					class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-[#ff007f] bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-[#ff007f] transition-all duration-500 hover:bg-[#ff007f]/10"
+					class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-[#22c55e] bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-[#22c55e] transition-all duration-500 hover:bg-[#22c55e]/10"
 				>
-					Explore our games
-					<span aria-hidden="true" class="text-sm">›</span>
-				</a>
-				<a
-					href="/#partners"
-					class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/30 bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5"
-				>
-					For brands
+					Explore games
 					<span aria-hidden="true" class="text-sm">›</span>
 				</a>
 			</div>
@@ -54,7 +74,10 @@ const visitsLabel = formatCompact(liveStats.totalVisits);
 			class="relative z-[2] mt-auto flex w-full max-w-7xl flex-wrap items-end justify-start gap-10 sm:gap-16"
 		>
 			<div>
-				<p class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl">
+				<p
+					id="hero-stat-players"
+					class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"
+				>
 					{playersLabel}+
 				</p>
 				<p
@@ -64,7 +87,10 @@ const visitsLabel = formatCompact(liveStats.totalVisits);
 				</p>
 			</div>
 			<div>
-				<p class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl">
+				<p
+					id="hero-stat-visits"
+					class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"
+				>
 					{visitsLabel}+
 				</p>
 				<p
@@ -76,3 +102,53 @@ const visitsLabel = formatCompact(liveStats.totalVisits);
 		</div>
 	</div>
 </section>
+<script is:inline>
+	(function () {
+		function formatCompact(n) {
+			if (n >= 1000000000) {
+				var v = n / 1000000000;
+				return (v >= 10 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, '')) + 'B';
+			}
+			if (n >= 1000000) {
+				var v2 = n / 1000000;
+				return (v2 >= 100 ? v2.toFixed(0) : v2.toFixed(1).replace(/\.0$/, '')) + 'M';
+			}
+			if (n >= 1000) {
+				var v3 = n / 1000;
+				return (v3 >= 100 ? v3.toFixed(0) : v3.toFixed(1).replace(/\.0$/, '')) + 'K';
+			}
+			return n.toLocaleString('en-US');
+		}
+		function applyTotals(list) {
+			var pEl = document.getElementById('hero-stat-players');
+			var vEl = document.getElementById('hero-stat-visits');
+			if (!pEl || !vEl || !Array.isArray(list)) return;
+			var tp = 0;
+			var tv = 0;
+			for (var i = 0; i < list.length; i++) {
+				var g = list[i];
+				if (typeof g.playing === 'number') tp += g.playing;
+				if (typeof g.visits === 'number') tv += g.visits;
+			}
+			pEl.textContent = formatCompact(tp) + '+';
+			vEl.textContent = formatCompact(tv) + '+';
+		}
+		async function refresh() {
+			try {
+				var res = await fetch('/api/roblox-group-games.json', { credentials: 'same-origin' });
+				var payload = await res.json();
+				applyTotals(payload.games);
+			} catch (e) {}
+		}
+		function boot() {
+			if (!document.getElementById('hero-stat-players')) return;
+			refresh();
+		}
+		document.addEventListener('astro:page-load', boot);
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+	})();
+</script>

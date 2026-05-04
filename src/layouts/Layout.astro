@@ -9,7 +9,7 @@ interface Props {
 const { title, description } = Astro.props;
 const desc =
 	description ??
-	'Hero Studios is a leading Roblox game development studio building immersive experiences for millions of players and brand opportunities on Roblox.';
+	'Voron Creations — Roblox games by Voron: incrementals, live player counts, and links to play.';
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ const desc =
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/hero-logo.png" />
+		<link rel="icon" type="image/png" href="/imagenes/Inicial.png" />
 		<meta name="description" content={desc} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,7 @@ const desc =
 		/>
 		<ClientRouter />
 	</head>
-	<body class="selection:bg-[#ff007f]/30 selection:text-white">
+	<body class="selection:bg-[#22c55e]/30 selection:text-white">
 		<slot />
 	</body>
 </html>
