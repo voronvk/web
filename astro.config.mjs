@@ -1,10 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 
+/** Vercel: serverless + prerendered pages. Use @astrojs/node if you self-host on a Node server instead. */
 export default defineConfig({
-	adapter: node({ mode: 'standalone' }),
+	adapter: vercel(),
 	vite: {
 		plugins: [tailwindcss()],
 	},
