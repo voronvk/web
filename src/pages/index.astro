@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SplashIntro from '../components/SplashIntro.astro';
+import Navbar from '../components/Navbar.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import FeaturedGames from '../components/FeaturedGames.astro';
+import PartnersSection from '../components/PartnersSection.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+
+<Layout
+	title="Hero Studios"
+	description="Hero Studios is a leading Roblox game development studio building immersive experiences for millions of players and creating powerful brand opportunities on Roblox."
+>
+	<SplashIntro />
+	<div class="bg-black min-h-screen text-white relative">
+		<Navbar />
+		<main class="z-10 relative">
+			<HeroSection />
+			<AboutSection />
+			<FeaturedGames />
+			<PartnersSection />
+		</main>
+		<SiteFooter />
+	</div>
+</Layout>

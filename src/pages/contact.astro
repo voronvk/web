@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout
+	title="Contact | Hero Studios"
+	description="Whether you're a brand, a creator, or just curious — we'd love to hear from you."
+>
+	<div class="min-h-screen bg-black text-white">
+		<Navbar />
+		<main class="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 md:pt-32 lg:px-8">
+			<div class="mx-auto max-w-3xl text-center">
+				<h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
+					Let's build something <span class="text-[#ff007f]">together</span>
+				</h1>
+				<p class="mt-5 text-base text-white/50 sm:text-lg">
+					Whether you're a brand, a creator, or just curious — we'd love to hear from you.
+				</p>
+			</div>
+			<div class="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-12 lg:items-start">
+				<div
+					class="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+				>
+					<p class="text-sm font-semibold text-white">What can we help you with?</p>
+					<div class="mt-4 grid gap-3 sm:grid-cols-3">
+						<label
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#ff007f] has-[:checked]:bg-[#ff007f]/5"
+						>
+							<input
+								type="radio"
+								name="topic"
+								value="brand"
+								class="peer sr-only"
+								checked
+							/>
+							<span
+								class="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#ff007f] opacity-0 transition-opacity peer-checked:opacity-100"
+							>
+							</span>
+							Brand partnerships
+						</label>
+						<label
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#ff007f] has-[:checked]:bg-[#ff007f]/5"
+						>
+							<input type="radio" name="topic" value="dev" class="peer sr-only" />
+							<span
+								class="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#ff007f] opacity-0 transition-opacity peer-checked:opacity-100"
+							>
+							</span>
+							Game development
+						</label>
+						<label
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#ff007f] has-[:checked]:bg-[#ff007f]/5 sm:col-span-1"
+						>
+							<input type="radio" name="topic" value="general" class="peer sr-only" />
+							<span
+								class="absolute right-2 top-2 h-2 w-2 rounded-full bg-[#ff007f] opacity-0 transition-opacity peer-checked:opacity-100"
+							>
+							</span>
+							General inquiry
+						</label>
+					</div>
+					<form id="contact-form" class="mt-8 space-y-5">
+						<div>
+							<label for="full-name" class="mb-2 block text-sm font-medium text-white/80">
+								Full name <span class="text-[#ff007f]">*</span>
+							</label>
+							<input
+								id="full-name"
+								name="fullName"
+								type="text"
+								required
+								placeholder="John Doe"
+								autocomplete="name"
+								class="w-full rounded-lg border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#ff007f]/50"
+							/>
+						</div>
+						<div>
+							<label for="email" class="mb-2 block text-sm font-medium text-white/80">
+								Email address <span class="text-[#ff007f]">*</span>
+							</label>
+							<input
+								id="email"
+								name="email"
+								type="email"
+								required
+								placeholder="john@company.com"
+								autocomplete="email"
+								class="w-full rounded-lg border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#ff007f]/50"
+							/>
+						</div>
+						<div>
+							<label for="company" class="mb-2 block text-sm font-medium text-white/80">
+								Company <span class="text-white/35">(optional)</span>
+							</label>
+							<input
+								id="company"
+								name="company"
+								type="text"
+								placeholder="Your company name"
+								autocomplete="organization"
+								class="w-full rounded-lg border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#ff007f]/50"
+							/>
+						</div>
+						<div>
+							<label for="message" class="mb-2 block text-sm font-medium text-white/80">
+								Message <span class="text-[#ff007f]">*</span>
+							</label>
+							<textarea
+								id="message"
+								name="message"
+								required
+								rows={5}
+								placeholder="Tell us about your project, goals, or questions..."
+								class="w-full resize-y rounded-lg border border-white/10 bg-black/50 px-4 py-3 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#ff007f]/50"
+							></textarea>
+						</div>
+						<div
+							class="rounded-lg border border-white/10 bg-black/40 px-4 py-6 text-center text-sm text-white/40"
+						>
+							Add Cloudflare Turnstile (or your captcha) here in production.
+						</div>
+						<p id="form-status" class="hidden text-sm text-[#ff007f]" role="status"></p>
+						<button
+							type="submit"
+							class="w-full rounded-lg bg-[#ff007f] py-3.5 text-sm font-bold text-black transition-all duration-300 hover:bg-[#ff007f]/90"
+						>
+							Send message
+						</button>
+					</form>
+				</div>
+				<div class="flex flex-col gap-6">
+					<div
+						class="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8"
+					>
+						<h2 class="text-lg font-bold text-white">What to expect</h2>
+						<ol class="mt-6 space-y-6">
+							<li class="flex gap-4">
+								<span class="text-2xl font-bold tabular-nums text-[#ff007f]">01</span>
+								<div>
+									<p class="font-medium text-white">We receive your message</p>
+									<p class="mt-1 text-sm text-white/45 leading-relaxed">
+										Your request lands with our team automatically.
+									</p>
+								</div>
+							</li>
+							<li class="flex gap-4">
+								<span class="text-2xl font-bold tabular-nums text-[#ff007f]">02</span>
+								<div>
+									<p class="font-medium text-white">Our team reviews it</p>
+									<p class="mt-1 text-sm text-white/45 leading-relaxed">
+										We read every note and route it to the right people.
+									</p>
+								</div>
+							</li>
+							<li class="flex gap-4">
+								<span class="text-2xl font-bold tabular-nums text-[#ff007f]">03</span>
+								<div>
+									<p class="font-medium text-white">We get back to you</p>
+									<p class="mt-1 text-sm text-white/45 leading-relaxed">
+										Expect a reply as soon as we can with next steps.
+									</p>
+								</div>
+							</li>
+						</ol>
+					</div>
+					<div
+						class="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8"
+					>
+						<h2 class="text-lg font-bold text-white">Our social medias</h2>
+						<div class="mt-4">
+							<a
+								href="https://x.com"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-all duration-300 hover:bg-white/10"
+								aria-label="X"
+							>
+								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path
+										d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+									></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</Layout>
+<script is:inline>
+	(function () {
+		var f = document.getElementById('contact-form');
+		var s = document.getElementById('form-status');
+		if (!f || !s) return;
+		f.addEventListener('submit', function (e) {
+			e.preventDefault();
+			s.textContent = 'Thanks — connect this form to your API, Formspree, or email handler.';
+			s.classList.remove('hidden');
+		});
+	})();
+</script>

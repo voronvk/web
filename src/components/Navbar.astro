@@ -1,0 +1,71 @@
+---
+const midLinks = [
+	{ href: '/', label: 'Home' },
+	{ href: '/#games', label: 'Games' },
+	{ href: '/#partners', label: 'For brands' },
+];
+---
+
+<header
+	class="z-50 fixed top-0 w-full border-white/5 border-b bg-black/50 backdrop-blur-md transition-all duration-300"
+>
+	<div
+		class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[4.25rem] sm:px-6 lg:px-8"
+	>
+		<a href="/" class="flex shrink-0 items-center gap-3 group">
+			<img
+				src="/hero-logo.png"
+				alt="Hero Studios"
+				width="48"
+				height="48"
+				draggable="false"
+				class="h-8 w-8 sm:h-9 sm:w-9 object-contain opacity-95 transition-opacity duration-300 group-hover:opacity-100"
+			/>
+			<span class="hidden font-bold text-white text-sm leading-tight tracking-tight sm:flex sm:flex-col">
+				<span>Hero</span>
+				<span>Studios</span>
+			</span>
+		</a>
+		<nav
+			class="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-12"
+			aria-label="Main"
+		>
+			{
+				midLinks.map((l) => (
+					<a
+						href={l.href}
+						class="text-white/70 hover:text-white text-xs font-semibold uppercase tracking-[0.2em] transition-colors duration-300"
+					>
+						{l.label}
+					</a>
+				))
+			}
+		</nav>
+		<div class="flex shrink-0 items-center gap-3">
+			<a
+				href="/contact"
+				class="inline-flex items-center justify-center gap-1 rounded-full bg-[#ff007f] px-4 py-2.5 text-xs font-bold uppercase tracking-wide text-black transition-all duration-300 hover:bg-[#ff007f]/90 sm:px-6 sm:text-sm"
+			>
+				Let's talk
+				<span aria-hidden="true" class="font-normal">›</span>
+			</a>
+		</div>
+	</div>
+	<div class="border-white/5 border-t px-4 pb-3 pt-2 md:hidden">
+		<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2" aria-label="Main mobile">
+			{
+				midLinks.map((l) => (
+					<a href={l.href} class="text-white/70 text-[11px] font-semibold uppercase tracking-widest">
+						{l.label}
+					</a>
+				))
+			}
+			<a
+				href="/contact"
+				class="text-[#ff007f] text-[11px] font-bold uppercase tracking-widest"
+			>
+				Contact
+			</a>
+		</nav>
+	</div>
+</header>

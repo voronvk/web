@@ -1,0 +1,78 @@
+---
+import HeroGameCarousel from './HeroGameCarousel.astro';
+import { liveStats, formatCompact } from '../data/site';
+
+const playersLabel = formatCompact(liveStats.totalPlayers);
+const visitsLabel = formatCompact(liveStats.totalVisits);
+---
+
+<section
+	id="top"
+	class="relative flex min-h-[100vh] flex-col overflow-hidden px-4 pb-12 pt-24 sm:px-6 lg:px-8"
+>
+	<HeroGameCarousel />
+	<div
+		class="pointer-events-none absolute inset-0 z-[1] bg-black/85"
+		aria-hidden="true"
+	>
+	</div>
+	<div class="relative z-[2] flex flex-1 flex-col">
+		<div
+			class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-4 py-12 text-center sm:px-6"
+		>
+			<h1
+				class="max-w-5xl text-4xl font-bold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl animate-azul-fade-up"
+			>
+				Unleashing the potential of <span class="text-[#ff007f]">Roblox</span> gaming
+			</h1>
+			<p
+				class="mx-auto mt-6 max-w-2xl text-base text-white/80 sm:text-lg leading-relaxed animate-azul-fade-up animate-azul-delay-1"
+			>
+				We create immersive, high-quality gaming experiences that captivate millions of players
+				and deliver measurable results for brands.
+			</p>
+			<div
+				class="mt-10 flex flex-wrap items-center justify-center gap-4 animate-azul-fade-up animate-azul-delay-2"
+			>
+				<a
+					href="/#games"
+					class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-[#ff007f] bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-[#ff007f] transition-all duration-500 hover:bg-[#ff007f]/10"
+				>
+					Explore our games
+					<span aria-hidden="true" class="text-sm">›</span>
+				</a>
+				<a
+					href="/#partners"
+					class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-white/30 bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:border-white/50 hover:bg-white/5"
+				>
+					For brands
+					<span aria-hidden="true" class="text-sm">›</span>
+				</a>
+			</div>
+		</div>
+		<div
+			class="relative z-[2] mt-auto flex w-full max-w-7xl flex-wrap items-end justify-start gap-10 sm:gap-16"
+		>
+			<div>
+				<p class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl">
+					{playersLabel}+
+				</p>
+				<p
+					class="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-sm"
+				>
+					Active players
+				</p>
+			</div>
+			<div>
+				<p class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl">
+					{visitsLabel}+
+				</p>
+				<p
+					class="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-sm"
+				>
+					Total visits
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

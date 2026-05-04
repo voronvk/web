@@ -1,0 +1,570 @@
+---
+import { getRobloxGroupId, projectPlaceholderImage } from '../data/site';
+
+const groupId = getRobloxGroupId();
+const groupRobloxUrl = `https://www.roblox.com/groups/${groupId}`;
+---
+
+<section id="games" class="relative z-10 px-4 py-20 sm:px-6 lg:px-8">
+	<div class="mx-auto max-w-7xl">
+		<div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-12 md:mb-16">
+			<div>
+				<h2 class="text-sm font-semibold uppercase tracking-widest text-[#ff007f]">
+					Featured games
+				</h2>
+				<p class="mt-2 text-3xl sm:text-4xl font-bold text-white tracking-tight">
+					Our experiences
+				</p>
+				<p class="mt-3 max-w-xl text-white/45 text-base">
+					Every experience published under our Roblox group.
+				</p>
+			</div>
+			<a
+				href={groupRobloxUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="shrink-0 text-sm font-medium text-white/50 hover:text-[#ff007f] transition-colors duration-300"
+			>
+				View group on Roblox →
+			</a>
+		</div>
+		<p id="group-games-status" class="text-white/50 text-center py-16 text-sm">
+			Loading games…
+		</p>
+		<div
+			id="group-games-grid"
+			class="hidden grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+		>
+		</div>
+		<div
+			id="overview-dashboard"
+			class="hidden mt-14 md:mt-20 overflow-hidden rounded-2xl border border-white/[0.08] bg-black"
+		>
+			<div class="border-white/[0.06] border-b bg-black px-5 py-6 sm:px-8 sm:py-8">
+				<div class="flex items-start gap-3">
+					<svg
+						class="mt-0.5 h-7 w-7 shrink-0 text-[#ff007f]"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						aria-hidden="true"
+					>
+						<path d="M4.5 12h5l2-8 4 16 2-8h5.5" stroke-linecap="round" stroke-linejoin="round"></path>
+					</svg>
+					<div>
+						<h3 class="text-xl font-bold tracking-tight text-white sm:text-2xl">Overview</h3>
+						<p class="mt-1 text-sm text-white/45">
+							Aggregated stats across all your tracked games
+						</p>
+					</div>
+				</div>
+				<div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+					<div
+						id="metric-card-ccu"
+						class="rounded-xl border-2 border-[#ff007f] bg-black/40 px-5 py-5 text-left shadow-[0_0_0_1px_rgba(255,0,127,0.2)]"
+					>
+						<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">
+							<svg class="h-4 w-4 text-white/50" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path
+									d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"
+								></path>
+							</svg>
+							TOTAL CCU
+						</div>
+						<div class="mt-3 flex flex-wrap items-baseline gap-2">
+							<span id="metric-ccu-value" class="text-3xl font-bold tabular-nums text-white sm:text-4xl"
+								>—</span
+							>
+							<span id="metric-ccu-delta" class="text-sm font-semibold tabular-nums"></span>
+						</div>
+					</div>
+					<div
+						class="rounded-xl border border-white/[0.1] bg-black/30 px-5 py-5 text-left transition-colors hover:border-white/20"
+					>
+						<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">
+							<svg class="h-4 w-4 text-white/50" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path
+									d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+								></path>
+							</svg>
+							TOTAL VISITS
+						</div>
+						<p id="metric-visits-value" class="mt-3 text-3xl font-bold tabular-nums text-white sm:text-4xl">
+							—
+						</p>
+					</div>
+					<div
+						class="rounded-xl border border-white/[0.1] bg-black/30 px-5 py-5 text-left transition-colors hover:border-white/20"
+					>
+						<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/45">
+							<svg class="h-4 w-4 text-white/50" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path
+									d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v-2h3v2zm0-3H8V8h3v2zm5 3h-3v-2h3v2zm0-3h-3V8h3v2z"
+								></path>
+							</svg>
+							GAMES
+						</div>
+						<p id="metric-games-value" class="mt-3 text-3xl font-bold tabular-nums text-white sm:text-4xl">
+							—
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="relative bg-black px-4 pb-5 pt-4 sm:px-8 sm:pb-8 sm:pt-6">
+				<p
+					class="pointer-events-none absolute bottom-4 right-5 sm:bottom-6 sm:right-8 text-[11px] tabular-nums tracking-tight text-white/40 z-10 font-medium"
+					id="ccu-chart-updated"
+				>
+				</p>
+				<div class="min-h-[240px] overflow-hidden bg-black" id="ccu-chart-svg-host"></div>
+			</div>
+		</div>
+	</div>
+</section>
+<script is:inline define:vars={{ fallbackImg: projectPlaceholderImage }}>
+	(function () {
+		function formatVisits(n) {
+			if (n >= 1000000000) {
+				var v = n / 1000000000;
+				return (v >= 10 ? v.toFixed(0) : v.toFixed(1).replace(/\.0$/, '')) + 'B';
+			}
+			if (n >= 1000000) {
+				var v2 = n / 1000000;
+				return (v2 >= 100 ? v2.toFixed(0) : v2.toFixed(1).replace(/\.0$/, '')) + 'M';
+			}
+			if (n >= 1000) {
+				var v3 = n / 1000;
+				return (v3 >= 100 ? v3.toFixed(0) : v3.toFixed(1).replace(/\.0$/, '')) + 'K';
+			}
+			return n.toLocaleString('en-US');
+		}
+		function applyLiveStats(rows) {
+			var map = {};
+			for (var i = 0; i < rows.length; i++) {
+				var row = rows[i];
+				var key = String(row.id != null ? row.id : row.universeId);
+				map[key] = row;
+			}
+			var cards = document.querySelectorAll('#group-games-grid [data-universe-id]');
+			for (var j = 0; j < cards.length; j++) {
+				var card = cards[j];
+				var uid = card.getAttribute('data-universe-id');
+				var stat = map[uid];
+				if (!stat) continue;
+				var playing = typeof stat.playing === 'number' ? stat.playing : null;
+				var visits = typeof stat.visits === 'number' ? stat.visits : null;
+				var pEl = card.querySelector('[data-game-playing]');
+				var vEl = card.querySelector('[data-game-visits]');
+				if (pEl != null && playing != null)
+					pEl.textContent = playing.toLocaleString('en-US') + ' playing';
+				if (vEl != null && visits != null) vEl.textContent = formatVisits(visits) + ' visits';
+			}
+		}
+		function esc(s) {
+			return String(s)
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/"/g, '&quot;');
+		}
+		var CCU_HISTORY_KEY = 'herostudios-ccu-history-v1';
+		var CCU_MAX_MS = 4 * 60 * 60 * 1000;
+		var CCU_MAX_POINTS = 400;
+		function loadCcuHistory() {
+			try {
+				var raw = sessionStorage.getItem(CCU_HISTORY_KEY);
+				if (!raw) return [];
+				var arr = JSON.parse(raw);
+				if (!Array.isArray(arr)) return [];
+				var now = Date.now();
+				var out = [];
+				for (var i = 0; i < arr.length; i++) {
+					var p = arr[i];
+					if (
+						p &&
+						typeof p.t === 'number' &&
+						typeof p.ccu === 'number' &&
+						now - p.t <= CCU_MAX_MS
+					) {
+						out.push({ t: p.t, ccu: p.ccu });
+					}
+				}
+				return out;
+			} catch (e) {
+				return [];
+			}
+		}
+		function saveCcuHistory(history) {
+			try {
+				sessionStorage.setItem(CCU_HISTORY_KEY, JSON.stringify(history));
+			} catch (e) {}
+		}
+		function appendTotalCcuSample(list) {
+			if (!list.length) return loadCcuHistory();
+			var sum = 0;
+			for (var i = 0; i < list.length; i++) {
+				var pl = list[i].playing;
+				if (typeof pl === 'number') sum += pl;
+			}
+			var history = loadCcuHistory();
+			var now = Date.now();
+			history.push({ t: now, ccu: sum });
+			while (history.length > CCU_MAX_POINTS) history.shift();
+			saveCcuHistory(history);
+			return history;
+		}
+		var CHART_ACCENT = '#ff007f';
+		var CHART_GRID = 'rgba(255,255,255,0.06)';
+		var CHART_MUTED = 'rgba(255,255,255,0.4)';
+		function formatHourLabel(ms) {
+			var d = new Date(ms);
+			return d.toLocaleTimeString(undefined, {
+				hour: 'numeric',
+				minute: '2-digit',
+				hour12: true,
+			});
+		}
+		function buildYAxis(peak) {
+			var step = 75;
+			var p = !isFinite(peak) || peak < 0 ? 0 : peak;
+			var yTop = Math.max(75, Math.ceil(Math.max(p, 1) / step) * step);
+			var count = yTop / step + 1;
+			while (count > 9) {
+				step *= 2;
+				yTop = Math.max(75, Math.ceil(Math.max(p, 1) / step) * step);
+				count = yTop / step + 1;
+			}
+			var values = [];
+			for (var v = 0; v <= yTop; v += step) {
+				values.push(v);
+			}
+			values.sort(function (a, b) {
+				return b - a;
+			});
+			return { yTop: yTop, tickValues: values };
+		}
+		function smoothLinePath(pts) {
+			if (pts.length === 0) return '';
+			if (pts.length === 1) return 'M ' + pts[0].x + ' ' + pts[0].y;
+			var d = 'M ' + pts[0].x + ' ' + pts[0].y;
+			for (var i = 0; i < pts.length - 1; i++) {
+				var p0 = pts[i === 0 ? 0 : i - 1];
+				var p1 = pts[i];
+				var p2 = pts[i + 1];
+				var p3 = pts[i + 2 < pts.length ? i + 2 : i + 1];
+				var cp1x = p1.x + (p2.x - p0.x) / 6;
+				var cp1y = p1.y + (p2.y - p0.y) / 6;
+				var cp2x = p2.x - (p3.x - p1.x) / 6;
+				var cp2y = p2.y - (p3.y - p1.y) / 6;
+				d += ' C ' + cp1x + ' ' + cp1y + ' ' + cp2x + ' ' + cp2y + ' ' + p2.x + ' ' + p2.y;
+			}
+			return d;
+		}
+		function xTickIndices(len, maxTicks) {
+			if (len <= 0) return [];
+			if (len <= maxTicks) {
+				var a = [];
+				for (var i = 0; i < len; i++) a.push(i);
+				return a;
+			}
+			var out = [];
+			var steps = maxTicks - 1;
+			out.push(0);
+			for (var s = 1; s < steps; s++) {
+				out.push(Math.round((s / steps) * (len - 1)));
+			}
+			out.push(len - 1);
+			var seen = {};
+			var dedup = [];
+			for (var j = 0; j < out.length; j++) {
+				var ix = out[j];
+				if (seen[ix]) continue;
+				seen[ix] = true;
+				dedup.push(ix);
+			}
+			dedup.sort(function (x, y) {
+				return x - y;
+			});
+			return dedup;
+		}
+		var PREV_CCU_KEY = 'herostudios-prev-ccu-delta';
+		function updateOverviewMetrics(list) {
+			var dash = document.getElementById('overview-dashboard');
+			var vCcu = document.getElementById('metric-ccu-value');
+			var vDelta = document.getElementById('metric-ccu-delta');
+			var vVis = document.getElementById('metric-visits-value');
+			var vGames = document.getElementById('metric-games-value');
+			if (!list.length) {
+				if (dash) dash.classList.add('hidden');
+				return;
+			}
+			if (dash) dash.classList.remove('hidden');
+			var totalCcu = 0;
+			var totalVisits = 0;
+			for (var i = 0; i < list.length; i++) {
+				var g = list[i];
+				if (typeof g.playing === 'number') totalCcu += g.playing;
+				if (typeof g.visits === 'number') totalVisits += g.visits;
+			}
+			if (vCcu) vCcu.textContent = totalCcu.toLocaleString('en-US');
+			if (vVis) vVis.textContent = formatVisits(totalVisits);
+			if (vGames) vGames.textContent = String(list.length);
+			if (vDelta) {
+				var prevRaw = sessionStorage.getItem(PREV_CCU_KEY);
+				sessionStorage.setItem(PREV_CCU_KEY, String(totalCcu));
+				if (prevRaw === null || prevRaw === '') {
+					vDelta.textContent = '';
+				} else {
+					var prev = Number(prevRaw);
+					var dlt = totalCcu - prev;
+					if (dlt === 0) {
+						vDelta.textContent = '';
+						vDelta.className = 'text-sm font-semibold tabular-nums text-white/30';
+					} else if (dlt > 0) {
+						vDelta.textContent = '+' + dlt.toLocaleString('en-US');
+						vDelta.className = 'text-sm font-semibold tabular-nums text-emerald-400';
+					} else {
+						vDelta.textContent = dlt.toLocaleString('en-US');
+						vDelta.className = 'text-sm font-semibold tabular-nums text-red-400';
+					}
+				}
+			}
+		}
+		function renderCcuLineChart(history) {
+			var host = document.getElementById('ccu-chart-svg-host');
+			var updated = document.getElementById('ccu-chart-updated');
+			if (!host) return;
+			if (!history.length) {
+				host.innerHTML =
+					'<p class="px-4 py-12 text-center text-sm text-white/40">Collecting CCU samples…</p>';
+				return;
+			}
+			var VW = 960;
+			var VH = 360;
+			var pad = { l: 44, r: 20, t: 16, b: 46 };
+			var cw = VW - pad.l - pad.r;
+			var ch = VH - pad.t - pad.b;
+			var plotBottom = pad.t + ch;
+			var minT = history[0].t;
+			var maxT = history[history.length - 1].t;
+			if (maxT <= minT) maxT = minT + 60000;
+			var peak = 0;
+			for (var i = 0; i < history.length; i++) {
+				if (history[i].ccu > peak) peak = history[i].ccu;
+			}
+			var yAxis = buildYAxis(peak);
+			var yTop = yAxis.yTop;
+			function xOf(t) {
+				return pad.l + ((t - minT) / (maxT - minT)) * cw;
+			}
+			function yOf(v) {
+				return pad.t + ch - (v / yTop) * ch;
+			}
+			var pts = [];
+			for (var j = 0; j < history.length; j++) {
+				var pt = history[j];
+				pts.push({ x: xOf(pt.t), y: yOf(pt.ccu) });
+			}
+			var pathD = smoothLinePath(pts);
+			var xFirst = pts[0].x;
+			var xLast = pts[pts.length - 1].x;
+			var areaD =
+				pathD +
+				' L ' +
+				xLast +
+				' ' +
+				plotBottom +
+				' L ' +
+				xFirst +
+				' ' +
+				plotBottom +
+				' Z';
+			var defs =
+				'<defs><linearGradient id="herostudios-ccu-area" gradientUnits="userSpaceOnUse" x1="0" y1="' +
+				pad.t +
+				'" x2="0" y2="' +
+				plotBottom +
+				'"><stop offset="0%" stop-color="' +
+				CHART_ACCENT +
+				'" stop-opacity="0.22"/><stop offset="55%" stop-color="' +
+				CHART_ACCENT +
+				'" stop-opacity="0.06"/><stop offset="100%" stop-color="' +
+				CHART_ACCENT +
+				'" stop-opacity="0"/></linearGradient></defs>';
+			var svgGrid = '';
+			for (var gi = 0; gi < yAxis.tickValues.length; gi++) {
+				var gv = yAxis.tickValues[gi];
+				var gy = yOf(gv);
+				svgGrid +=
+					'<line x1="' +
+					pad.l +
+					'" y1="' +
+					gy +
+					'" x2="' +
+					(VW - pad.r) +
+					'" y2="' +
+					gy +
+					'" stroke="' +
+					CHART_GRID +
+					'" stroke-width="1"/>';
+				svgGrid +=
+					'<text x="' +
+					(pad.l - 10) +
+					'" y="' +
+					(gy + 4) +
+					'" text-anchor="end" fill="' +
+					CHART_MUTED +
+					'" font-size="11" font-weight="500" font-family="system-ui,-apple-system,sans-serif">' +
+					gv +
+					'</text>';
+			}
+			var tickIdx = xTickIndices(history.length, 10);
+			var svgX = '';
+			for (var xt = 0; xt < tickIdx.length; xt++) {
+				var idx = tickIdx[xt];
+				var tkX = xOf(history[idx].t);
+				svgX +=
+					'<text x="' +
+					tkX +
+					'" y="' +
+					(VH - 10) +
+					'" text-anchor="middle" fill="' +
+					CHART_MUTED +
+					'" font-size="11" font-weight="500" font-family="system-ui,-apple-system,sans-serif">' +
+					esc(formatHourLabel(history[idx].t)) +
+					'</text>';
+			}
+			var lastPt = history[history.length - 1];
+			var lx = xOf(lastPt.t);
+			var ly = yOf(lastPt.ccu);
+			var dot =
+				'<circle cx="' +
+				lx +
+				'" cy="' +
+				ly +
+				'" r="3.5" fill="' +
+				CHART_ACCENT +
+				'" stroke="#000000" stroke-width="1"/>';
+			host.innerHTML =
+				'<svg viewBox="0 0 ' +
+				VW +
+				' ' +
+				VH +
+				'" class="h-auto w-full min-h-[240px] block" role="img" aria-label="Total CCU over time">' +
+				defs +
+				svgGrid +
+				'<path d="' +
+				areaD +
+				'" fill="url(#herostudios-ccu-area)" stroke="none"/>' +
+				'<path d="' +
+				pathD +
+				'" fill="none" stroke="' +
+				CHART_ACCENT +
+				'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+				dot +
+				svgX +
+				'</svg>';
+			if (updated) {
+				var d = new Date();
+				updated.textContent =
+					'Peak ' +
+					peak.toLocaleString('en-US') +
+					' · ' +
+					d.toLocaleTimeString(undefined, {
+						hour: '2-digit',
+						minute: '2-digit',
+						second: '2-digit',
+						hour12: false,
+					});
+			}
+		}
+		function renderCcuChart(list) {
+			updateOverviewMetrics(list);
+			var history = appendTotalCcuSample(list);
+			renderCcuLineChart(history);
+		}
+		function cardHtml(g) {
+			var thumb = g.thumbnailUrl || fallbackImg;
+			var playing = typeof g.playing === 'number' ? g.playing.toLocaleString('en-US') : '—';
+			var visits = typeof g.visits === 'number' ? formatVisits(g.visits) : '—';
+			var uid = esc(g.universeId);
+			var name = esc(g.name);
+			var href = esc(g.gameUrl);
+			var imgSrc = esc(thumb);
+			return (
+				'<article data-universe-id="' +
+				uid +
+				'" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-[#ff007f]/35 hover:shadow-[0_0_40px_-10px_rgba(255,0,127,0.35)]">' +
+				'<a href="' +
+				href +
+				'" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff007f] focus-visible:ring-offset-2 focus-visible:ring-offset-black">' +
+				'<div class="relative aspect-[16/9] overflow-hidden bg-zinc-900">' +
+				'<img src="' +
+				imgSrc +
+				'" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" />' +
+				'<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div>' +
+				'<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5 flex flex-wrap items-end justify-between gap-2">' +
+				'<h3 class="text-lg sm:text-xl font-bold text-white leading-tight pr-2">' +
+				name +
+				'</h3>' +
+				'<div class="flex gap-3 text-xs font-medium tabular-nums text-white/80">' +
+				'<span data-game-playing class="rounded-md border border-white/15 bg-black/40 px-2 py-1 backdrop-blur-sm">' +
+				playing +
+				' playing</span>' +
+				'<span data-game-visits class="rounded-md border border-white/15 bg-black/40 px-2 py-1 backdrop-blur-sm">' +
+				visits +
+				' visits</span>' +
+				'</div></div></div>' +
+				'<div class="px-5 py-4 border-t border-white/5">' +
+				'<span class="text-[#ff007f] text-sm font-medium group-hover:translate-x-0.5 inline-block transition-transform duration-300">Play on Roblox →</span>' +
+				'</div></a></article>'
+			);
+		}
+		async function loadOnce(isRefresh) {
+			var status = document.getElementById('group-games-status');
+			var grid = document.getElementById('group-games-grid');
+			if (!grid) return;
+			try {
+				var res = await fetch('/api/roblox-group-games.json', { credentials: 'same-origin' });
+				var payload = await res.json();
+				var list = payload.games;
+				if (!Array.isArray(list)) list = [];
+				if (!isRefresh) {
+					if (status) status.classList.add('hidden');
+					grid.classList.remove('hidden');
+					grid.innerHTML = list.map(cardHtml).join('');
+					if (!list.length && status) {
+						status.textContent = 'No experiences found for this group.';
+						status.classList.remove('hidden');
+						grid.classList.add('hidden');
+						var dashEl = document.getElementById('overview-dashboard');
+						if (dashEl) dashEl.classList.add('hidden');
+					}
+					renderCcuChart(list);
+				} else {
+					applyLiveStats(
+						list.map(function (g) {
+							return { id: g.universeId, playing: g.playing, visits: g.visits };
+						}),
+					);
+					renderCcuChart(list);
+				}
+			} catch (e) {
+				if (status && !isRefresh) {
+					status.textContent = 'Could not load group games. Try again later.';
+				}
+			}
+		}
+		function start() {
+			loadOnce(false);
+			setInterval(function () {
+				loadOnce(true);
+			}, 60000);
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', start);
+		} else {
+			start();
+		}
+	})();
+</script>

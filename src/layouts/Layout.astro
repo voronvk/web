@@ -1,0 +1,34 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+const { title, description } = Astro.props;
+const desc =
+	description ??
+	'Hero Studios is a leading Roblox game development studio building immersive experiences for millions of players and brand opportunities on Roblox.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/hero-logo.png" />
+		<meta name="description" content={desc} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<ClientRouter />
+	</head>
+	<body class="selection:bg-[#ff007f]/30 selection:text-white">
+		<slot />
+	</body>
+</html>
