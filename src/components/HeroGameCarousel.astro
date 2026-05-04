@@ -6,57 +6,65 @@ const rotated = [...heroBannerThumbnails.slice(4), ...heroBannerThumbnails.slice
 const midStrip = [...rotated, ...rotated];
 ---
 
-<div class="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-	<div class="absolute inset-0 z-0 flex flex-col justify-center gap-14 py-[8vh] opacity-95 sm:gap-16 md:gap-24 md:py-[9vh] lg:gap-28">
-		<div class="overflow-hidden">
+<div
+	class="pointer-events-none absolute inset-0 z-0 isolate overflow-hidden"
+	aria-hidden="true"
+>
+	<div
+		class="absolute inset-0 z-0 flex min-h-0 flex-col justify-center gap-8 py-[6vh] opacity-95 sm:gap-14 sm:py-[8vh] md:gap-20 md:py-[9vh] lg:gap-24"
+	>
+		<div class="shrink-0 overflow-hidden">
 			<div class="hero-marquee-track py-0.5" style="animation-duration: 78s">
 				{
-					strip.map((src) => (
+					strip.map((src, i) => (
 						<img
 							src={src}
 							alt=""
 							width="400"
 							height="225"
 							class="h-44 w-64 shrink-0 rounded-xl object-cover sm:h-48 sm:w-72 md:h-56 md:w-80 lg:h-64 lg:w-96 xl:h-[17rem] xl:w-[28rem]"
-							loading="lazy"
+							loading="eager"
 							decoding="async"
+							fetchpriority={i === 0 ? 'high' : 'low'}
 						/>
 					))
 				}
 			</div>
 		</div>
-		<div class="overflow-hidden">
+		<div class="shrink-0 overflow-hidden">
 			<div
 				class="hero-marquee-track hero-marquee-track-reverse py-0.5"
 				style="animation-duration: 92s"
 			>
 				{
-					midStrip.map((src) => (
+					midStrip.map((src, i) => (
 						<img
 							src={src}
 							alt=""
 							width="400"
 							height="225"
 							class="h-44 w-64 shrink-0 rounded-xl object-cover sm:h-48 sm:w-72 md:h-56 md:w-80 lg:h-64 lg:w-96 xl:h-[17rem] xl:w-[28rem]"
-							loading="lazy"
+							loading="eager"
 							decoding="async"
+							fetchpriority={i === 0 ? 'high' : 'low'}
 						/>
 					))
 				}
 			</div>
 		</div>
-		<div class="overflow-hidden">
+		<div class="shrink-0 overflow-hidden">
 			<div class="hero-marquee-track py-0.5" style="animation-duration: 85s">
 				{
-					strip.map((src) => (
+					strip.map((src, i) => (
 						<img
 							src={src}
 							alt=""
 							width="400"
 							height="225"
 							class="h-44 w-64 shrink-0 rounded-xl object-cover sm:h-48 sm:w-72 md:h-56 md:w-80 lg:h-64 lg:w-96 xl:h-[17rem] xl:w-[28rem]"
-							loading="lazy"
+							loading="eager"
 							decoding="async"
+							fetchpriority={i === 0 ? 'high' : 'low'}
 						/>
 					))
 				}

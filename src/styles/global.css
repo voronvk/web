@@ -112,24 +112,16 @@
 	}
 }
 
-.hero-marquee-lane {
-	contain: paint;
-}
-
 .hero-marquee-track {
 	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	width: max-content;
 	gap: 2rem;
 	animation: hero-marquee linear infinite;
 	will-change: transform;
 	backface-visibility: hidden;
 	transform: translate3d(0, 0, 0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.hero-marquee-track {
-		animation-duration: 120s !important;
-	}
 }
 
 @media (min-width: 768px) {

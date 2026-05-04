@@ -25,7 +25,7 @@ import Navbar from '../components/Navbar.astro';
 					<p class="text-sm font-semibold text-white">What can we help you with?</p>
 					<div class="mt-4 grid gap-3 sm:grid-cols-3">
 						<label
-							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5"
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-[border-color,background-color] duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5"
 						>
 							<input
 								type="radio"
@@ -41,7 +41,7 @@ import Navbar from '../components/Navbar.astro';
 							Games &amp; Roblox
 						</label>
 						<label
-							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5"
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-[border-color,background-color] duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5"
 						>
 							<input type="radio" name="topic" value="dev" class="peer sr-only" />
 							<span
@@ -51,7 +51,7 @@ import Navbar from '../components/Navbar.astro';
 							Game development
 						</label>
 						<label
-							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-all duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5 sm:col-span-1"
+							class="group relative block cursor-pointer rounded-xl border-2 border-white/10 bg-black/30 p-4 text-center text-sm font-medium text-white/90 transition-[border-color,background-color] duration-300 has-[:checked]:border-[#22c55e] has-[:checked]:bg-[#22c55e]/5 sm:col-span-1"
 						>
 							<input type="radio" name="topic" value="general" class="peer sr-only" />
 							<span
@@ -124,7 +124,7 @@ import Navbar from '../components/Navbar.astro';
 						<p id="form-status" class="hidden text-sm text-[#22c55e]" role="status"></p>
 						<button
 							type="submit"
-							class="w-full rounded-lg bg-[#22c55e] py-3.5 text-sm font-bold text-black transition-all duration-300 hover:bg-[#22c55e]/90"
+							class="w-full rounded-lg bg-[#22c55e] py-3.5 text-sm font-bold text-black transition-colors duration-300 hover:bg-[#22c55e]/90"
 						>
 							Send message
 						</button>
@@ -174,7 +174,7 @@ import Navbar from '../components/Navbar.astro';
 								href="https://x.com"
 								target="_blank"
 								rel="noopener noreferrer"
-								class="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-all duration-300 hover:bg-white/10"
+								class="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-colors duration-300 hover:bg-white/10"
 								aria-label="X"
 							>
 								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
