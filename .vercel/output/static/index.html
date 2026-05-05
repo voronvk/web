@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/imagenes/Inicial.png"><meta name="description" content="Voron Creations — Roblox incrementals and more. Live stats and links to every experience Voron publishes on the platform."><title>Voron Creations</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><link rel="stylesheet" href="/_astro/Navbar.DiSgXjEO.css"></head> <body class="selection:bg-[#22c55e]/30 selection:text-white">  <div id="hero-splash" class="z-[100] fixed inset-0 flex justify-center items-center bg-black/98 transition-opacity duration-300 ease-out" aria-hidden="true"> <img src="/imagenes/Inicial.png" alt="" width="180" height="180" draggable="false" class="w-36 h-36 sm:w-44 sm:h-44 object-contain motion-safe:animate-pulse select-none" loading="eager"> </div> <script>
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/imagenes/Inicial.png"><meta name="description" content="Voron Creations — Roblox incrementals and more. Live stats and links to every experience Voron publishes on the platform."><title>Voron Creations</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><link rel="stylesheet" href="/_astro/Navbar.CDDlq-b9.css"></head> <body class="selection:bg-[#22c55e]/30 selection:text-white">  <div id="hero-splash" class="z-[100] fixed inset-0 flex justify-center items-center bg-black/98 transition-opacity duration-300 ease-out" aria-hidden="true"> <img src="/imagenes/Inicial.png" alt="" width="180" height="180" draggable="false" class="w-36 h-36 sm:w-44 sm:h-44 object-contain motion-safe:animate-pulse select-none" loading="eager"> </div> <script>
 	(function () {
 		var el = document.getElementById('hero-splash');
 		if (!el) return;
@@ -23,10 +23,10 @@ Voron
 The official archive of my Roblox games and projects.
 </p> <div class="mt-10 flex flex-wrap items-center justify-center gap-4 animate-azul-fade-up animate-azul-delay-2"> <a href="/#games" class="inline-flex items-center justify-center gap-2 rounded-md border-2 border-[#22c55e] bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-[#22c55e] transition-[color,background-color,border-color] duration-500 hover:bg-[#22c55e]/10">
 Explore games
-<span aria-hidden="true" class="text-sm">›</span> </a> </div> </div> <div class="relative z-[2] mt-auto flex w-full max-w-7xl flex-wrap items-end justify-start gap-10 sm:gap-16"> <div> <p id="hero-stat-players" class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"> 5+
+<span aria-hidden="true" class="text-sm">›</span> </a> </div> </div> <div class="relative z-[2] mt-auto flex w-full max-w-7xl flex-wrap items-end justify-start gap-10 sm:gap-16"> <div> <p id="hero-stat-players" data-stat-value="2" class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"> 2+
 </p> <p class="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-sm">
 Active players
-</p> </div> <div> <p id="hero-stat-visits" class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"> 93.2K+
+</p> </div> <div> <p id="hero-stat-visits" data-stat-value="94162" class="text-3xl font-bold tabular-nums text-white sm:text-4xl md:text-5xl"> 94.2K+
 </p> <p class="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-sm">
 Total visits
 </p> </div> </div> </div> </section> <script>
@@ -57,20 +57,50 @@ Total visits
 				if (typeof g.playing === 'number') tp += g.playing;
 				if (typeof g.visits === 'number') tv += g.visits;
 			}
-			pEl.textContent = formatCompact(tp) + '+';
-			vEl.textContent = formatCompact(tv) + '+';
+			animateStatChange(pEl, tp, function (value) {
+				return formatCompact(value) + '+';
+			});
+			animateStatChange(vEl, tv, function (value) {
+				return formatCompact(value) + '+';
+			});
+		}
+		function animateStatChange(el, nextValue, formatFn) {
+			var prevValue = Number(el.dataset.statValue);
+			if (!Number.isFinite(prevValue)) {
+				el.dataset.statValue = String(nextValue);
+				el.textContent = formatFn(nextValue);
+				return;
+			}
+			if (nextValue === prevValue) return;
+			el.classList.remove('stat-change-up', 'stat-change-down');
+			void el.offsetWidth;
+			el.classList.add(nextValue > prevValue ? 'stat-change-up' : 'stat-change-down');
+			el.dataset.statValue = String(nextValue);
+			el.textContent = formatFn(nextValue);
 		}
 		async function refresh() {
 			try {
 				var res = await fetch('/api/roblox-group-games.json', { credentials: 'same-origin' });
+				if (!res.ok) return;
 				var payload = await res.json();
 				applyTotals(payload.games);
 			} catch (e) {}
 		}
 		function boot() {
 			if (!document.getElementById('hero-stat-players')) return;
+			if (window.__heroTotalsPollId) {
+				clearInterval(window.__heroTotalsPollId);
+				window.__heroTotalsPollId = null;
+			}
 			refresh();
+			window.__heroTotalsPollId = setInterval(refresh, 60000);
 		}
+		document.addEventListener('astro:before-preparation', function () {
+			if (window.__heroTotalsPollId) {
+				clearInterval(window.__heroTotalsPollId);
+				window.__heroTotalsPollId = null;
+			}
+		});
 		document.addEventListener('astro:page-load', boot);
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', boot);
@@ -85,16 +115,16 @@ Live stats for the Roblox games linked on this site &mdash; no group list, just 
 				experiences Voron publishes here.
 </p> </div> <p id="group-games-status" class="text-white/50 text-center py-16 text-sm hidden">
 Loading games…
-</p> <div id="group-games-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"> <article data-universe-id="10093033209" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/84101125715344/My-Tomato-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-5928440fb9ee5348150eeea7c737daac/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">🍅My Tomato Incremental!</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 0 playing
-</span> <span data-game-visits class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 4.7K visits
+</p> <div id="group-games-grid" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"> <article data-universe-id="10093033209" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/84101125715344/My-Tomato-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-5928440fb9ee5348150eeea7c737daac/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">🍅My Tomato Incremental!</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing data-stat-value="0" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 0 playing
+</span> <span data-game-visits data-stat-value="4733" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 4.7K visits
 </span> </div> </div> </div> <div class="border-t border-white/5 px-5 py-4"> <span class="inline-block text-sm font-medium text-[#22c55e] transition-transform duration-300 group-hover:translate-x-0.5">
 Play on Roblox →
-</span> </div> </a> </article><article data-universe-id="10096800568" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/120901689792962/My-Egg-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-a68533cb3e7ef977f52dcb8e540b96e7/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">🥚 My Egg Incremental!</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 0 playing
-</span> <span data-game-visits class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 19.6K visits
+</span> </div> </a> </article><article data-universe-id="10096800568" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/120901689792962/My-Egg-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-a68533cb3e7ef977f52dcb8e540b96e7/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">🥚 My Egg Incremental!</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing data-stat-value="2" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 2 playing
+</span> <span data-game-visits data-stat-value="20476" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 20.5K visits
 </span> </div> </div> </div> <div class="border-t border-white/5 px-5 py-4"> <span class="inline-block text-sm font-medium text-[#22c55e] transition-transform duration-300 group-hover:translate-x-0.5">
 Play on Roblox →
-</span> </div> </a> </article><article data-universe-id="9854182522" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/90607799581188/Idle-Melon-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-9638d45d2d52a5e0ce70ab670f4d754f/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">[Runes!] 🍉 Idle Melon Incremental</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 5 playing
-</span> <span data-game-visits class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 68.9K visits
+</span> </div> </a> </article><article data-universe-id="9854182522" class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] [contain:paint] transition-[border-color,box-shadow] duration-500 hover:border-[#22c55e]/35 hover:shadow-[0_0_40px_-10px_rgba(34,197,94,0.35)]"> <a href="https://www.roblox.com/games/90607799581188/Idle-Melon-Incremental" target="_blank" rel="noopener noreferrer" class="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#22c55e] focus-visible:ring-offset-2 focus-visible:ring-offset-black"> <div class="relative aspect-[16/9] overflow-hidden bg-zinc-900"> <img src="https://tr.rbxcdn.com/180DAY-a77d85608e9631922e2e1abe1c9e2afe/512/512/Image/Png/noFilter" alt="" width="768" height="432" class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy" decoding="async"> <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90"></div> <div class="absolute bottom-0 left-0 right-0 flex flex-wrap items-end justify-between gap-2 p-4 sm:p-5"> <h3 class="pr-2 text-lg font-bold leading-tight text-white sm:text-xl">🍉 Idle Melon Incremental</h3> <div class="flex gap-3 text-xs font-medium tabular-nums text-white/80"> <span data-game-playing data-stat-value="0" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 0 playing
+</span> <span data-game-visits data-stat-value="68953" class="rounded-md border border-white/15 bg-black/65 px-2 py-1"> 69K visits
 </span> </div> </div> </div> <div class="border-t border-white/5 px-5 py-4"> <span class="inline-block text-sm font-medium text-[#22c55e] transition-transform duration-300 group-hover:translate-x-0.5">
 Play on Roblox →
 </span> </div> </a> </article> </div> </div> </section> <script>(function(){const fallbackImg = "https://r2.fivemanage.com/6NQ840l30BWj9rij5CfY2/Roblox/project.png";
@@ -132,10 +162,31 @@ Play on Roblox →
 				var visits = typeof stat.visits === 'number' ? stat.visits : null;
 				var pEl = card.querySelector('[data-game-playing]');
 				var vEl = card.querySelector('[data-game-visits]');
-				if (pEl != null && playing != null)
-					pEl.textContent = playing.toLocaleString('en-US') + ' playing';
-				if (vEl != null && visits != null) vEl.textContent = formatVisits(visits) + ' visits';
+				if (pEl != null && playing != null) {
+					animateStatChange(pEl, playing, function (value) {
+						return value.toLocaleString('en-US') + ' playing';
+					});
+				}
+				if (vEl != null && visits != null) {
+					animateStatChange(vEl, visits, function (value) {
+						return formatVisits(value) + ' visits';
+					});
+				}
 			}
+		}
+		function animateStatChange(el, nextValue, formatFn) {
+			var prevValue = Number(el.dataset.statValue);
+			if (!Number.isFinite(prevValue)) {
+				el.dataset.statValue = String(nextValue);
+				el.textContent = formatFn(nextValue);
+				return;
+			}
+			if (nextValue === prevValue) return;
+			el.classList.remove('stat-change-up', 'stat-change-down');
+			void el.offsetWidth;
+			el.classList.add(nextValue > prevValue ? 'stat-change-up' : 'stat-change-down');
+			el.dataset.statValue = String(nextValue);
+			el.textContent = formatFn(nextValue);
 		}
 		function esc(s) {
 			return String(s)
@@ -168,10 +219,14 @@ Play on Roblox →
 				name +
 				'</h3>' +
 				'<div class="flex gap-3 text-xs font-medium tabular-nums text-white/80">' +
-				'<span data-game-playing class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
+				'<span data-game-playing data-stat-value="' +
+				(typeof g.playing === 'number' ? g.playing : 0) +
+				'" class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
 				playing +
 				' playing</span>' +
-				'<span data-game-visits class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
+				'<span data-game-visits data-stat-value="' +
+				(typeof g.visits === 'number' ? g.visits : 0) +
+				'" class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
 				visits +
 				' visits</span>' +
 				'</div></div></div>' +

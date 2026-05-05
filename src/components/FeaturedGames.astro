@@ -69,12 +69,14 @@ const hasSsrGames = initialGames.length > 0;
 									<div class="flex gap-3 text-xs font-medium tabular-nums text-white/80">
 										<span
 											data-game-playing
+											data-stat-value={g.playing}
 											class="rounded-md border border-white/15 bg-black/65 px-2 py-1"
 										>
 											{g.playing.toLocaleString('en-US')} playing
 										</span>
 										<span
 											data-game-visits
+											data-stat-value={g.visits}
 											class="rounded-md border border-white/15 bg-black/65 px-2 py-1"
 										>
 											{formatCompact(g.visits)} visits
@@ -128,10 +130,31 @@ const hasSsrGames = initialGames.length > 0;
 				var visits = typeof stat.visits === 'number' ? stat.visits : null;
 				var pEl = card.querySelector('[data-game-playing]');
 				var vEl = card.querySelector('[data-game-visits]');
-				if (pEl != null && playing != null)
-					pEl.textContent = playing.toLocaleString('en-US') + ' playing';
-				if (vEl != null && visits != null) vEl.textContent = formatVisits(visits) + ' visits';
+				if (pEl != null && playing != null) {
+					animateStatChange(pEl, playing, function (value) {
+						return value.toLocaleString('en-US') + ' playing';
+					});
+				}
+				if (vEl != null && visits != null) {
+					animateStatChange(vEl, visits, function (value) {
+						return formatVisits(value) + ' visits';
+					});
+				}
 			}
+		}
+		function animateStatChange(el, nextValue, formatFn) {
+			var prevValue = Number(el.dataset.statValue);
+			if (!Number.isFinite(prevValue)) {
+				el.dataset.statValue = String(nextValue);
+				el.textContent = formatFn(nextValue);
+				return;
+			}
+			if (nextValue === prevValue) return;
+			el.classList.remove('stat-change-up', 'stat-change-down');
+			void el.offsetWidth;
+			el.classList.add(nextValue > prevValue ? 'stat-change-up' : 'stat-change-down');
+			el.dataset.statValue = String(nextValue);
+			el.textContent = formatFn(nextValue);
 		}
 		function esc(s) {
 			return String(s)
@@ -164,10 +187,14 @@ const hasSsrGames = initialGames.length > 0;
 				name +
 				'</h3>' +
 				'<div class="flex gap-3 text-xs font-medium tabular-nums text-white/80">' +
-				'<span data-game-playing class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
+				'<span data-game-playing data-stat-value="' +
+				(typeof g.playing === 'number' ? g.playing : 0) +
+				'" class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
 				playing +
 				' playing</span>' +
-				'<span data-game-visits class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
+				'<span data-game-visits data-stat-value="' +
+				(typeof g.visits === 'number' ? g.visits : 0) +
+				'" class="rounded-md border border-white/15 bg-black/65 px-2 py-1">' +
 				visits +
 				' visits</span>' +
 				'</div></div></div>' +

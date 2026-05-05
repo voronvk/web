@@ -139,3 +139,43 @@
 .hero-marquee-track-reverse {
 	animation-direction: reverse;
 }
+
+@keyframes stat-change-up {
+	0% {
+		transform: translate3d(0, 0, 0);
+		color: rgb(255 255 255);
+	}
+	45% {
+		transform: translate3d(0, -6px, 0);
+		color: rgb(74 222 128);
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		color: rgb(255 255 255);
+	}
+}
+
+@keyframes stat-change-down {
+	0% {
+		transform: translate3d(0, 0, 0);
+		color: rgb(255 255 255);
+	}
+	45% {
+		transform: translate3d(0, 6px, 0);
+		color: rgb(134 239 172);
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+		color: rgb(255 255 255);
+	}
+}
+
+.stat-change-up {
+	animation: stat-change-up 420ms ease;
+	will-change: transform, color;
+}
+
+.stat-change-down {
+	animation: stat-change-down 420ms ease;
+	will-change: transform, color;
+}
