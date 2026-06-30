@@ -88,19 +88,7 @@
 }
 
 .text-gradient-accent {
-	background: linear-gradient(
-		105deg,
-		#fff 0%,
-		#22c55e 45%,
-		#4ade80 55%,
-		#fff 100%
-	);
-	background-size: 200% auto;
-	-webkit-background-clip: text;
-	background-clip: text;
-	color: transparent;
-	animation: azul-shimmer 8s linear infinite;
-	will-change: background-position;
+	color: #22c55e;
 }
 
 @keyframes hero-marquee {

@@ -107,5 +107,7 @@ export async function getCuratedRobloxGamesPayload(): Promise<{ games: RobloxGam
 		});
 	}
 
+	games.sort((a, b) => b.playing - a.playing);
+
 	return { games };
 }

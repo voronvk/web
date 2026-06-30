@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import SocialLinks from '../components/SocialLinks.astro';
 ---
 
 <Layout
 	title="Contact | Voron Creations"
-	description="Whether you're a brand, a creator, or just curious — we'd love to hear from you."
+	description="Whether you're a brand, a creator, or just curious, we'd love to hear from you."
 >
 	<div class="min-h-screen bg-black text-white">
 		<Navbar />
@@ -15,12 +16,12 @@ import Navbar from '../components/Navbar.astro';
 					Let's build something <span class="text-[#22c55e]">together</span>
 				</h1>
 				<p class="mt-5 text-base text-white/50 sm:text-lg">
-					Whether you're a brand, a creator, or just curious — we'd love to hear from you.
+					Whether you're a brand, a creator, or just curious, we'd love to hear from you.
 				</p>
 			</div>
 			<div class="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-12 lg:items-start">
 				<div
-					class="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+					class="rounded-2xl border border-white/10 bg-zinc-900/50 p-6 sm:p-8"
 				>
 					<p class="text-sm font-semibold text-white">What can we help you with?</p>
 					<div class="mt-4 grid gap-3 sm:grid-cols-3">
@@ -170,19 +171,7 @@ import Navbar from '../components/Navbar.astro';
 					>
 						<h2 class="text-lg font-bold text-white">Our social medias</h2>
 						<div class="mt-4">
-							<a
-								href="https://x.com"
-								target="_blank"
-								rel="noopener noreferrer"
-								class="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/80 transition-colors duration-300 hover:bg-white/10"
-								aria-label="X"
-							>
-								<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-									<path
-										d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-									></path>
-								</svg>
-							</a>
+							<SocialLinks size="lg" />
 						</div>
 					</div>
 				</div>
@@ -197,7 +186,7 @@ import Navbar from '../components/Navbar.astro';
 		if (!f || !s) return;
 		f.addEventListener('submit', function (e) {
 			e.preventDefault();
-			s.textContent = 'Thanks — connect this form to your API, Formspree, or email handler.';
+			s.textContent = 'Thanks. Connect this form to your API, Formspree, or email handler.';
 			s.classList.remove('hidden');
 		});
 	})();

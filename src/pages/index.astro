@@ -4,12 +4,14 @@ import SplashIntro from '../components/SplashIntro.astro';
 import Navbar from '../components/Navbar.astro';
 import HeroSection from '../components/HeroSection.astro';
 import FeaturedGames from '../components/FeaturedGames.astro';
+import NowSection from '../components/NowSection.astro';
+import AboutSection from '../components/AboutSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 ---
 
 <Layout
 	title="Voron Creations"
-	description="Voron Creations — Roblox incrementals and more. Live stats and links to every experience Voron publishes on the platform."
+	description="Voron Creations: Roblox incrementals and more. Live stats and links to every experience Voron publishes on the platform."
 >
 	<SplashIntro />
 	<div class="bg-black min-h-screen text-white relative">
@@ -17,6 +19,8 @@ import SiteFooter from '../components/SiteFooter.astro';
 		<main class="z-10 relative">
 			<HeroSection />
 			<FeaturedGames />
+			<NowSection />
+			<AboutSection />
 		</main>
 		<SiteFooter />
 	</div>

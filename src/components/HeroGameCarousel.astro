@@ -2,7 +2,8 @@
 import { heroBannerThumbnails } from '../data/site';
 
 const strip = [...heroBannerThumbnails, ...heroBannerThumbnails];
-const rotated = [...heroBannerThumbnails.slice(4), ...heroBannerThumbnails.slice(0, 4)];
+const rotateBy = Math.max(1, Math.floor(heroBannerThumbnails.length / 2));
+const rotated = [...heroBannerThumbnails.slice(rotateBy), ...heroBannerThumbnails.slice(0, rotateBy)];
 const midStrip = [...rotated, ...rotated];
 ---
 
@@ -11,7 +12,7 @@ const midStrip = [...rotated, ...rotated];
 	aria-hidden="true"
 >
 	<div
-		class="absolute inset-0 z-0 flex min-h-0 flex-col justify-center gap-8 py-[6vh] opacity-95 sm:gap-14 sm:py-[8vh] md:gap-20 md:py-[9vh] lg:gap-24"
+		class="absolute inset-0 z-0 flex min-h-0 flex-col justify-center gap-8 py-[6vh] sm:gap-14 sm:py-[8vh] md:gap-20 md:py-[9vh] lg:gap-24"
 	>
 		<div class="shrink-0 overflow-hidden">
 			<div class="hero-marquee-track py-0.5" style="animation-duration: 78s">

@@ -1,8 +1,12 @@
 ---
+import SocialLinks from './SocialLinks.astro';
+
 const year = new Date().getFullYear();
 const quick = [
 	{ href: '/', label: 'Home' },
 	{ href: '/#games', label: 'Games' },
+	{ href: '/#now', label: 'Now' },
+	{ href: '/#about', label: 'About' },
 	{ href: '/contact', label: 'Contact' },
 ];
 ---
@@ -25,7 +29,7 @@ const quick = [
 					</span>
 				</a>
 				<p class="max-w-xs text-sm text-white/40 leading-relaxed">
-					Roblox incrementals and more from Voron &mdash; live stats and links to every published
+					Roblox incrementals and more from Voron. Live stats and links to every published
 					experience.
 				</p>
 			</div>
@@ -51,24 +55,7 @@ const quick = [
 					Connect with us
 				</h3>
 				<div class="flex items-center gap-4">
-					<a
-						href="https://x.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/70 transition-colors duration-300 hover:bg-white/10 hover:text-white"
-						aria-label="X (Twitter)"
-					>
-						<svg
-							class="h-[18px] w-[18px] opacity-80"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-							/>
-						</svg>
-					</a>
+					<SocialLinks />
 				</div>
 			</div>
 		</div>
