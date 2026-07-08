@@ -105,9 +105,9 @@ export const currentWork = {
 	intro: 'Projects in active development. Not live on Roblox yet.',
 	items: [
 		{
-			title: 'Ever Green Game',
+			title: '🚗 Dodge the Cars!',
 			status: 'in-development',
-			description: 'Fast paced, mini-game creative game.',
+			description: 'A sequel from Dodge the Lasers!',
 			imageSrc: '/imagenes/wip-1.png',
 		},
 		{
