@@ -1,34 +1,139 @@
----
-import { ClientRouter } from 'astro:transitions';
-import '../styles/global.css';
-
+﻿---
 interface Props {
 	title: string;
 	description?: string;
+	active?: 'home' | 'games';
 }
-const { title, description } = Astro.props;
+const { title, description, active = 'home' } = Astro.props;
 const desc =
 	description ??
-	'Voron Creations: Roblox games by Voron. Incrementals, live player counts, and links to play.';
+	'Voron Creations ÔÇö Roblox games like Dodge the Lasers! and Idle Melon Incremental.';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href="/imagenes/Inicial.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/assets/dodge-lasers.png" />
 		<meta name="description" content={desc} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
-		<ClientRouter />
+		<link rel="stylesheet" href="/css/styles.css" />
+		<script is:inline>
+			(function () {
+				try {
+					var s = localStorage.getItem('theme');
+					document.documentElement.setAttribute(
+						'data-theme',
+						s === 'dark' ? 'dark' : 'light',
+					);
+				} catch (e) {
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			})();
+		</script>
 	</head>
-	<body class="selection:bg-[#22c55e]/30 selection:text-white">
+	<body>
+		<header class="site-header">
+			<div class="header-inner">
+				<button
+					type="button"
+					class="menu-toggle"
+					data-menu-toggle
+					aria-expanded="false"
+					aria-controls="primary-navigation"
+					aria-label="Open navigation menu"
+				>
+					<svg width="18" height="13" viewBox="0 0 18 13" aria-hidden="true">
+						<path
+							d="M1 1.5h16M1 6.5h16M1 11.5h16"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							fill="none"></path>
+					</svg>
+				</button>
+				<a class="logo logo-text" href="/" aria-label="Voron Creations home">Voron Creations</a>
+				<div class="nav-divider" aria-hidden="true"></div>
+				<div class="header-right">
+					<nav
+						id="primary-navigation"
+						class="primary-nav"
+						data-primary-nav
+						aria-label="Primary"
+					>
+						<a class={active === 'home' ? 'is-active' : undefined} href="/">Home</a>
+						<a class={active === 'games' ? 'is-active' : undefined} href="/games">Games</a>
+					</nav>
+				</div>
+			</div>
+		</header>
+
 		<slot />
+
+		<footer class="site-footer">
+			<div class="footer-inner">
+				<div class="footer-cols">
+					<div class="footer-col">
+						<h3>Site</h3>
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/games">Games</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h3>Games</h3>
+						<ul>
+							<li>
+								<a
+									href="https://www.roblox.com/games/128740661033853/Dodge-the-Lasers"
+									target="_blank"
+									rel="noopener noreferrer">Dodge the Lasers!</a
+								>
+							</li>
+							<li>
+								<a
+									href="https://www.roblox.com/games/90607799581188/Idle-Melon-Incremental"
+									target="_blank"
+									rel="noopener noreferrer">Idle Melon Incremental</a
+								>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-brand">
+					<a class="logo logo-text" href="/">Voron Creations</a>
+					<p class="footer-copy">Copyright ┬® 2026 Voron Creations.</p>
+					<p class="footer-copy">All rights reserved.</p>
+					<div class="theme-switch" role="radiogroup" aria-label="Theme">
+						<button
+							type="button"
+							data-theme-btn="light"
+							aria-label="Light theme"
+							class="is-active"
+						>
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								><circle cx="12" cy="12" r="4"></circle><path
+									d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+								></path></svg
+							>
+						</button>
+						<button type="button" data-theme-btn="dark" aria-label="Dark theme">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+								><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+							>
+						</button>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="/js/main.js" defer></script>
 	</body>
 </html>

@@ -1,27 +1,166 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
-import SplashIntro from '../components/SplashIntro.astro';
-import Navbar from '../components/Navbar.astro';
-import HeroSection from '../components/HeroSection.astro';
-import FeaturedGames from '../components/FeaturedGames.astro';
-import NowSection from '../components/NowSection.astro';
-import AboutSection from '../components/AboutSection.astro';
-import SiteFooter from '../components/SiteFooter.astro';
 ---
 
-<Layout
-	title="Voron Creations"
-	description="Voron Creations: Roblox incrementals and more. Live stats and links to every experience Voron publishes on the platform."
->
-	<SplashIntro />
-	<div class="bg-black min-h-screen text-white relative">
-		<Navbar />
-		<main class="z-10 relative">
-			<HeroSection />
-			<FeaturedGames />
-			<NowSection />
-			<AboutSection />
-		</main>
-		<SiteFooter />
-	</div>
+<Layout title="Voron Creations" active="home">
+	<main class="page">
+		<section class="hero">
+			<div class="hero-inner">
+				<div class="hero-copy">
+					<p class="brand-label">Voron Creations</p>
+					<h1>Games made by me.</h1>
+					<p class="hero-lead">Fun Roblox experiences ÔÇö built from the ground up.</p>
+					<div class="hero-actions">
+						<a class="btn btn-green" href="#featured">Play Featured</a>
+						<a class="btn btn-outline" href="/games">Explore Games</a>
+					</div>
+				</div>
+				<div class="hero-media">
+					<a
+						class="hero-card"
+						href="https://www.roblox.com/games/128740661033853/Dodge-the-Lasers"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="hero-card-img">
+							<img
+								src="/assets/dodge-lasers.png"
+								alt="Dodge the Lasers!"
+								width="512"
+								height="512"
+								fetchpriority="high"
+							/>
+							<p class="hero-card-label">Dodge the Lasers!</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="featured" id="featured">
+			<div class="featured-grid">
+				<div class="featured-art">
+					<img src="/assets/dodge-lasers.png" alt="" width="512" height="512" loading="lazy" />
+				</div>
+				<div class="featured-copy">
+					<p class="eyebrow">Featured Game</p>
+					<span class="tag">Voron Creations</span>
+					<h2>Dodge the Lasers!</h2>
+					<p>
+						Survive the lasers and become the winner! Climb to the top of the leaderboard and unlock
+						new skills.
+					</p>
+					<a
+						class="btn btn-blue"
+						href="https://www.roblox.com/games/128740661033853/Dodge-the-Lasers"
+						target="_blank"
+						rel="noopener noreferrer">Play Now</a
+					>
+				</div>
+			</div>
+		</section>
+
+		<section class="numbers">
+			<h2>Some BIG Numbers</h2>
+			<p>Ever wonder why I love making games?</p>
+			<div class="stats">
+				<div class="stat">
+					<p class="stat-value">9.5M+</p>
+					<p class="stat-label">Total Visits</p>
+					<p class="stat-note">Across every game I've made</p>
+				</div>
+				<div class="stat">
+					<p class="stat-value">+700K</p>
+					<p class="stat-label">Daily Active Users</p>
+					<p class="stat-note">Players jumping in every day</p>
+				</div>
+				<div class="stat">
+					<p class="stat-value">2</p>
+					<p class="stat-label">Live Titles</p>
+					<p class="stat-note">Dodge the Lasers! ┬À Idle Melon Incremental</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="games-section" id="ourgames">
+			<div class="games-section-inner">
+				<div class="section-head">
+					<h2>My Games</h2>
+					<p>Check out the games I've made.</p>
+				</div>
+				<div class="games-grid">
+					<article class="game-card">
+						<img
+							src="/assets/dodge-lasers.png"
+							alt="Dodge the Lasers!"
+							width="512"
+							height="512"
+							loading="lazy"
+						/>
+						<div class="game-card-body">
+							<h3>Dodge the Lasers!</h3>
+							<p class="game-year">9.4M+ visits</p>
+							<p class="game-desc">
+								Survive the lasers, climb the leaderboard, and unlock new skills.
+							</p>
+							<a
+								class="btn btn-green"
+								href="https://www.roblox.com/games/128740661033853/Dodge-the-Lasers"
+								target="_blank"
+								rel="noopener noreferrer">Play Now</a
+							>
+						</div>
+					</article>
+					<article class="game-card">
+						<img
+							src="/assets/idle-melon.png"
+							alt="Idle Melon Incremental"
+							width="512"
+							height="512"
+							loading="lazy"
+						/>
+						<div class="game-card-body">
+							<h3>Idle Melon Incremental</h3>
+							<p class="game-year">77K+ visits</p>
+							<p class="game-desc">
+								Farm watermelons, unlock new melons, prestige, and climb the boards.
+							</p>
+							<a
+								class="btn btn-green"
+								href="https://www.roblox.com/games/90607799581188/Idle-Melon-Incremental"
+								target="_blank"
+								rel="noopener noreferrer">Play Now</a
+							>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<div class="community-wrap">
+			<div class="community">
+				<div class="community-copy">
+					<h2>Play my games today!</h2>
+					<p>Jump into a Voron Creations experience on Roblox.</p>
+					<div class="hero-actions" style="margin-top: 1.5rem">
+						<a
+							class="btn btn-green"
+							href="https://www.roblox.com/games/128740661033853/Dodge-the-Lasers"
+							target="_blank"
+							rel="noopener noreferrer">Dodge the Lasers!</a
+						>
+						<a
+							class="btn btn-outline"
+							href="https://www.roblox.com/games/90607799581188/Idle-Melon-Incremental"
+							target="_blank"
+							rel="noopener noreferrer">Idle Melon</a
+						>
+					</div>
+				</div>
+				<div class="community-mascot">
+					<img src="/assets/idle-melon.png" alt="Idle Melon" width="400" height="400" loading="lazy" />
+				</div>
+			</div>
+		</div>
+	</main>
 </Layout>
