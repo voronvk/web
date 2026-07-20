@@ -7,14 +7,14 @@ interface Props {
 const { title, description, active = 'home' } = Astro.props;
 const desc =
 	description ??
-	'Voron Creations ÔÇö Roblox games like Dodge the Lasers! and Idle Melon Incremental.';
+	'Voron Creations - Roblox games like Dodge the Lasers! and Idle Melon Incremental.';
 ---
 
 <!doctype html>
 <html lang="en" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<link rel="icon" type="image/png" href="/assets/dodge-lasers.png" />
 		<meta name="description" content={desc} />
 		<title>{title}</title>
@@ -109,7 +109,7 @@ const desc =
 				</div>
 				<div class="footer-brand">
 					<a class="logo logo-text" href="/">Voron Creations</a>
-					<p class="footer-copy">Copyright ┬® 2026 Voron Creations.</p>
+					<p class="footer-copy">Copyright &copy; 2026 Voron Creations.</p>
 					<p class="footer-copy">All rights reserved.</p>
 					<div class="theme-switch" role="radiogroup" aria-label="Theme">
 						<button
